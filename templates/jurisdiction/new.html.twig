@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Jurisdiction{% endblock %}
+
+{% block body %}
+    <h1>Create new Jurisdiction</h1>
+
+    {{ include('jurisdiction/_form.html.twig') }}
+
+    <a href="{{ path('jurisdiction_index') }}">back to list</a>
+{% endblock %}
