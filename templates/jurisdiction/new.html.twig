@@ -3,9 +3,14 @@
 {% block title %}{{ 'Create new legal form'|trans}}{% endblock %}
 
 {% block body %}
-    <h1>{{ 'Create new legal form'|trans}}</h1>
+    <div class="container mt-4">
+        <h1>{{ 'Create new legal form'|trans}}</h1>
 
-    {{ include('jurisdiction/_form.html.twig') }}
+        {{ include('jurisdiction/_form.html.twig') }}
 
-    <a href="{{ path('jurisdiction_index') }}">{{ 'Back to list'|trans}}</a>
+        <div class="text-right">
+            <a href="{{ path('jurisdiction_index') }}" class="btn btn-primary">{{ 'Back to list'|trans}}</a>
+        </div>
+
+    </div>
 {% endblock %}

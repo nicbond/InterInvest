@@ -3,24 +3,24 @@
 {% block title %}{{ 'Jurisdiction'|trans}}{% endblock %}
 
 {% block body %}
-    <h1>{{ 'Jurisdiction'|trans}}</h1>
+    <div class="container mt-4">
+        <h1>{{ 'Jurisdiction'|trans}}</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ jurisdiction.id }}</td>
-            </tr>
-            <tr>
-                <th>{{ 'Name'|trans}}</th>
-                <td>{{ jurisdiction.name }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ jurisdiction.id }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'Name'|trans}}</th>
+                    <td>{{ jurisdiction.name }}</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <a href="{{ path('jurisdiction_index') }}">{{ 'Back to list'|trans}}</a>
-
-    <a href="{{ path('jurisdiction_edit', {'id': jurisdiction.id}) }}">{{ 'Edit'|trans}}</a>
-
-    {{ include('jurisdiction/_delete_form.html.twig') }}
+        <div class="text-right">
+            <a href="{{ path('jurisdiction_index') }}" class="btn btn-primary">{{ 'Back to list'|trans}}</a>
+        </div>
+    </div>
 {% endblock %}
