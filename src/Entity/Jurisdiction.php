@@ -22,11 +22,6 @@ class Jurisdiction
      */
     private $name;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Company::class, mappedBy="jurisdiction", cascade={"persist", "remove"})
-     */
-    private $company;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -40,23 +35,6 @@ class Jurisdiction
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getCompany(): ?Company
-    {
-        return $this->company;
-    }
-
-    public function setCompany(Company $company): self
-    {
-        // set the owning side of the relation if necessary
-        if ($company->getJurisdiction() !== $this) {
-            $company->setJurisdiction($this);
-        }
-
-        $this->company = $company;
 
         return $this;
     }
