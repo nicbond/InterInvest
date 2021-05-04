@@ -3,9 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Company;
+use App\Entity\Jurisdiction;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class CompanyType extends AbstractType
 {
@@ -16,6 +18,10 @@ class CompanyType extends AbstractType
             ->add('siren_number')
             ->add('city_registration')
             ->add('share_social')
+            ->add('jurisdiction', EntityType::class, [
+                'class'    => Jurisdiction::class,
+                'choice_label' => 'name'
+            ])
         ;
     }
 

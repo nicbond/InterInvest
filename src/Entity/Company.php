@@ -46,6 +46,11 @@ class Company
      */
     private $share_social;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Jurisdiction::class, inversedBy="company", cascade={"persist"})
+     */
+    private $jurisdiction;
+
     public function __construct()
     {
         $this->date_registration = new \DateTime();
@@ -112,6 +117,18 @@ class Company
     public function setShareSocial(int $share_social): self
     {
         $this->share_social = $share_social;
+
+        return $this;
+    }
+
+    public function getJurisdiction(): ?Jurisdiction
+    {
+        return $this->jurisdiction;
+    }
+
+    public function setJurisdiction(?Jurisdiction $jurisdiction): self
+    {
+        $this->jurisdiction = $jurisdiction;
 
         return $this;
     }
