@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Create new address'|trans}}{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>{{ 'Create new address'|trans}}</h1>
+
+        {{ include('address/_form.html.twig') }}
+
+        <div class="text-right">
+            <a href="{{ path('address_index') }}" class="btn btn-primary">{{ 'Back to list'|trans}}</a>
+        </div>
+
+    </div>
+{% endblock %}

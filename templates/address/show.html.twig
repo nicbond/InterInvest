@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Address'|trans}}{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>{{ 'Address'|trans}}</h1>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ address.id }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'Number'|trans}}</th>
+                    <td>{{ address.number }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'Way'|trans}}</th>
+                    <td>{{ address.way }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'Street_name'|trans}}</th>
+                    <td>{{ address.streetName }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'City'|trans}}</th>
+                    <td>{{ address.city }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'Postal_code'|trans}}</th>
+                    <td>{{ address.postalCode }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'Created_at'|trans}}</th>
+                    <td>{{ address.createdAt ? address.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'Updated_at'|trans}}</th>
+                    <td>{{ address.updatedAt ? address.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="text-right">
+            <a href="{{ path('address_index') }}" class="btn btn-primary">{{ 'Back to list'|trans}}</a>
+        </div>
+    </div>
+{% endblock %}
