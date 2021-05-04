@@ -20,6 +20,7 @@ class JurisdictionType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Jurisdiction::class,
+            'translation_domain' => 'forms'
         ]);
     }
 }

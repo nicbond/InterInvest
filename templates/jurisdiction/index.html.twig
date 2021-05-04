@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Jurisdiction index{% endblock %}
+{% block title %}{{ 'Jurisdiction index'|trans}}{% endblock %}
 
 {% block body %}
-    <h1>Jurisdiction index</h1>
+    <h1>{{ 'Jurisdiction index'|trans}}</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
+                <th>{{ 'Name'|trans}}</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -19,17 +19,17 @@
                 <td>{{ jurisdiction.id }}</td>
                 <td>{{ jurisdiction.name }}</td>
                 <td>
-                    <a href="{{ path('jurisdiction_show', {'id': jurisdiction.id}) }}">show</a>
-                    <a href="{{ path('jurisdiction_edit', {'id': jurisdiction.id}) }}">edit</a>
+                    <a href="{{ path('jurisdiction_show', {'id': jurisdiction.id}) }}">{{ 'Show'|trans}}</a>
+                    <a href="{{ path('jurisdiction_edit', {'id': jurisdiction.id}) }}">{{ 'Edit'|trans}}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">{{ 'no records found'|trans}}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('jurisdiction_new') }}">Create new</a>
+    <a href="{{ path('jurisdiction_new') }}">{{ 'Create new legal form'|trans}}</a>
 {% endblock %}

@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Jurisdiction{% endblock %}
+{% block title %}{{ 'Edit Jurisdiction'|trans}}{% endblock %}
 
 {% block body %}
-    <h1>Edit Jurisdiction</h1>
+    <h1>{{ 'Edit Jurisdiction'|trans}}</h1>
 
-    {{ include('jurisdiction/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('jurisdiction_index') }}">back to list</a>
-
+    {{ include('jurisdiction/_form.html.twig', {'button_label': 'Enregistrer'}) }}
     {{ include('jurisdiction/_delete_form.html.twig') }}
+
+    <a href="{{ path('jurisdiction_index') }}">{{ 'Back to list'|trans}}</a>
+
 {% endblock %}
