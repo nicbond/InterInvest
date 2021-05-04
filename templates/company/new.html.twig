@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Create new company'|trans}}{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>{{ 'Create new company'|trans}}</h1>
+
+        {{ include('company/_form.html.twig') }}
+
+        <div class="text-right">
+            <a href="{{ path('company_index') }}" class="btn btn-primary">{{ 'Back to list'|trans}}</a>
+        </div>
+
+    </div>
+{% endblock %}
