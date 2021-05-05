@@ -77,6 +77,7 @@ class AddressController extends AbstractController
             $historical->setCity($address->getCity());
             $historical->setPostalCode($address->getPostalCode());
             $historical->setAddress($address);
+            $historical->setCompany($address->getCompany());
 
             $this->getDoctrine()->getManager()->persist($historical);
             $this->getDoctrine()->getManager()->flush();

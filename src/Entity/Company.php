@@ -64,12 +64,18 @@ class Company
      */
     private $historicalCompanies;
 
+    /**
+     * @ORM\OneToMany(targetEntity=HistoricalAddress::class, mappedBy="company")
+     */
+    private $historicalAddresses;
+
 
     public function __construct()
     {
         $this->date_registration = new \DateTime();
         $this->addresses = new ArrayCollection();
         $this->historicalCompanies = new ArrayCollection();
+        $this->historicalAddresses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -203,6 +209,36 @@ class Company
             // set the owning side to null (unless already changed)
             if ($historicalCompany->getCompany() === $this) {
                 $historicalCompany->setCompany(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|HistoricalAddress[]
+     */
+    public function getHistoricalAddresses(): Collection
+    {
+        return $this->historicalAddresses;
+    }
+
+    public function addHistoricalAddress(HistoricalAddress $historicalAddress): self
+    {
+        if (!$this->historicalAddresses->contains($historicalAddress)) {
+            $this->historicalAddresses[] = $historicalAddress;
+            $historicalAddress->setCompany($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistoricalAddress(HistoricalAddress $historicalAddress): self
+    {
+        if ($this->historicalAddresses->removeElement($historicalAddress)) {
+            // set the owning side to null (unless already changed)
+            if ($historicalAddress->getCompany() === $this) {
+                $historicalAddress->setCompany(null);
             }
         }
 
