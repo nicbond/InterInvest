@@ -28,7 +28,7 @@ class Company
 
     /**
      * @ORM\Column(type="string", length=15)
-     * @Assert\Length(min=14, max=15)
+     * @Assert\Length(min=9, max=15)
      */
     private $siren_number;
 
