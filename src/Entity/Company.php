@@ -49,14 +49,16 @@ class Company
     private $share_social;
 
     /**
-     * @ORM\OneToOne(targetEntity=Jurisdiction::class, inversedBy="company", cascade={"persist"})
-     */
-    private $jurisdiction;
-
-    /**
      * @ORM\OneToMany(targetEntity=Address::class, mappedBy="company")
      */
     private $addresses;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Jurisdiction::class, inversedBy="companies")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $jurisdiction;
+
 
     public function __construct()
     {
@@ -129,18 +131,6 @@ class Company
         return $this;
     }
 
-    public function getJurisdiction(): ?Jurisdiction
-    {
-        return $this->jurisdiction;
-    }
-
-    public function setJurisdiction(?Jurisdiction $jurisdiction): self
-    {
-        $this->jurisdiction = $jurisdiction;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Address[]
      */
@@ -167,6 +157,18 @@ class Company
                 $address->setCompany(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getJurisdiction(): ?Jurisdiction
+    {
+        return $this->jurisdiction;
+    }
+
+    public function setJurisdiction(?Jurisdiction $jurisdiction): self
+    {
+        $this->jurisdiction = $jurisdiction;
 
         return $this;
     }

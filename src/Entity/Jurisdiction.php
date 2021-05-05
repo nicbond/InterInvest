@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\JurisdictionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,9 +25,14 @@ class Jurisdiction
     private $name;
 
     /**
-     * @ORM\OneToOne(targetEntity=Company::class, mappedBy="jurisdiction", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Company::class, mappedBy="jurisdiction")
      */
-    private $company;
+    private $companies;
+
+    public function __construct()
+    {
+        $this->companies = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -44,24 +51,32 @@ class Jurisdiction
         return $this;
     }
 
-    public function getCompany(): ?Company
+    /**
+     * @return Collection|Company[]
+     */
+    public function getCompanies(): Collection
     {
-        return $this->company;
+        return $this->companies;
     }
 
-    public function setCompany(?Company $company): self
+    public function addCompany(Company $company): self
     {
-        // unset the owning side of the relation if necessary
-        if ($company === null && $this->company !== null) {
-            $this->company->setJurisdiction(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($company !== null && $company->getJurisdiction() !== $this) {
+        if (!$this->companies->contains($company)) {
+            $this->companies[] = $company;
             $company->setJurisdiction($this);
         }
 
-        $this->company = $company;
+        return $this;
+    }
+
+    public function removeCompany(Company $company): self
+    {
+        if ($this->companies->removeElement($company)) {
+            // set the owning side to null (unless already changed)
+            if ($company->getJurisdiction() === $this) {
+                $company->setJurisdiction(null);
+            }
+        }
 
         return $this;
     }
