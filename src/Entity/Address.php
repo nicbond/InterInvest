@@ -57,6 +57,12 @@ class Address
      */
     private $updated_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="addresses")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $company;
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
@@ -147,6 +153,18 @@ class Address
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?Company $company): self
+    {
+        $this->company = $company;
 
         return $this;
     }
