@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AddressRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -63,9 +65,15 @@ class Address
      */
     private $company;
 
+    /**
+     * @ORM\OneToMany(targetEntity=HistoricalAddress::class, mappedBy="address")
+     */
+    private $historicalAddresses;
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
+        $this->historicalAddresses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -165,6 +173,36 @@ class Address
     public function setCompany(?Company $company): self
     {
         $this->company = $company;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|HistoricalAddress[]
+     */
+    public function getHistoricalAddresses(): Collection
+    {
+        return $this->historicalAddresses;
+    }
+
+    public function addHistoricalAddress(HistoricalAddress $historicalAddress): self
+    {
+        if (!$this->historicalAddresses->contains($historicalAddress)) {
+            $this->historicalAddresses[] = $historicalAddress;
+            $historicalAddress->setAddress($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistoricalAddress(HistoricalAddress $historicalAddress): self
+    {
+        if ($this->historicalAddresses->removeElement($historicalAddress)) {
+            // set the owning side to null (unless already changed)
+            if ($historicalAddress->getAddress() === $this) {
+                $historicalAddress->setAddress(null);
+            }
+        }
 
         return $this;
     }

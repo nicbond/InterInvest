@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Address;
 use App\Form\AddressType;
 use App\Repository\AddressRepository;
+use App\Entity\HistoricalAddress;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,10 +65,20 @@ class AddressController extends AbstractController
      */
     public function edit(Request $request, Address $address): Response
     {
+        $historical = new HistoricalAddress();
+
         $form = $this->createForm(AddressType::class, $address);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $historical->setNumber($address->getNumber());
+            $historical->setWay($address->getWay());
+            $historical->setStreetName($address->getStreetName());
+            $historical->setCity($address->getCity());
+            $historical->setPostalCode($address->getPostalCode());
+            $historical->setAddress($address);
+
+            $this->getDoctrine()->getManager()->persist($historical);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('address_index');

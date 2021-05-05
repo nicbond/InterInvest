@@ -54,6 +54,16 @@ class HistoricalAddress
      */
     private $created_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Address::class, inversedBy="historicalAddresses")
+     */
+    private $address;
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -127,6 +137,18 @@ class HistoricalAddress
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?Address $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }
