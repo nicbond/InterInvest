@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Company;
 use App\Form\CompanyType;
 use App\Repository\CompanyRepository;
+use App\Entity\HistoricalCompany;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,10 +65,18 @@ class CompanyController extends AbstractController
      */
     public function edit(Request $request, Company $company): Response
     {
+        $historical = new HistoricalCompany();
         $form = $this->createForm(CompanyType::class, $company);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $historical->setName($company->getName());
+            $historical->setSirenNumber($company->getSirenNumber());
+            $historical->setCityRegistration($company->getCityRegistration());
+            $historical->setShareSocial($company->getShareSocial());
+            $historical->setCompany($company);
+
+            $this->getDoctrine()->getManager()->persist($historical);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('company_index');

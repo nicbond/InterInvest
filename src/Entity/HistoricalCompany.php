@@ -37,12 +37,22 @@ class HistoricalCompany
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date_registration;
+    private $created_at;
 
     /**
      * @ORM\Column(type="integer")
      */
     private $share_social;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="historicalCompanies")
+     */
+    private $company;
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -85,14 +95,14 @@ class HistoricalCompany
         return $this;
     }
 
-    public function getDateRegistration(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->date_registration;
+        return $this->created_at;
     }
 
-    public function setDateRegistration(\DateTimeInterface $date_registration): self
+    public function setCreatedAt(\DateTimeInterface $created_at): self
     {
-        $this->date_registration = $date_registration;
+        $this->created_at = $created_at;
 
         return $this;
     }
@@ -105,6 +115,18 @@ class HistoricalCompany
     public function setShareSocial(int $share_social): self
     {
         $this->share_social = $share_social;
+
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?Company $company): self
+    {
+        $this->company = $company;
 
         return $this;
     }
