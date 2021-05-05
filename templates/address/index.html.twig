@@ -4,11 +4,12 @@
 
 {% block body %}
     <div class="container mt-4">
-        <h1>{{ 'Address index'|trans}}</h1>
+        <div class="text-primary" style="font-weight: bold;font-size: 4rem;"><h1>{{ 'Address index'|trans}}</h1></div>
 
         <table class="table">
             <thead>
                 <tr>
+                    <th>Id</th>
                     <th>{{ 'Number'|trans}}</th>
                     <th>{{ 'Way'|trans}}</th>
                     <th>{{ 'Street_name'|trans}}</th>
@@ -20,6 +21,7 @@
         <tbody>
         {% for address in addresses %}
             <tr>
+                <td>{{ address.id }}</td>
                 <td>{{ address.number }}</td>
                 <td>{{ address.way }}</td>
                 <td>{{ address.streetName }}</td>
