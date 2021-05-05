@@ -4,13 +4,17 @@
 
 {% block body %}
     <div class="container mt-4">
-        <h1>{{ 'Address'|trans}}</h1>
+        <div class="text-primary" style="font-weight: bold;font-size: 4rem;"><h1>{{ 'Address'|trans}}</h1></div>
 
         <table class="table">
             <tbody>
                 <tr>
                     <th>Id</th>
                     <td>{{ address.id }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'Company'|trans}}</th>
+                    <td>{{ address.company.name }}</td>
                 </tr>
                 <tr>
                     <th>{{ 'Number'|trans}}</th>
