@@ -10,12 +10,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Jurisdiction;
+use App\Repository\JurisdictionRepository;
 
 /**
  * @Route("/company")
  */
 class CompanyController extends AbstractController
 {
+     /**
+     * @var JurisdictionRepository
+     */
+    private $repository;
+
+    public function __construct(JurisdictionRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * @Route("/", name="company_index", methods={"GET"})
      */
@@ -66,15 +78,18 @@ class CompanyController extends AbstractController
     public function edit(Request $request, Company $company): Response
     {
         $historical = new HistoricalCompany();
+
         $form = $this->createForm(CompanyType::class, $company);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $jurisdiction = $this->repository->find($company->getJurisdiction());
             $historical->setName($company->getName());
             $historical->setSirenNumber($company->getSirenNumber());
             $historical->setCityRegistration($company->getCityRegistration());
             $historical->setShareSocial($company->getShareSocial());
             $historical->setCompany($company);
+            $historical->setJurisdiction($jurisdiction);
 
             $this->getDoctrine()->getManager()->persist($historical);
             $this->getDoctrine()->getManager()->flush();

@@ -49,6 +49,11 @@ class HistoricalCompany
      */
     private $company;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Jurisdiction::class, inversedBy="historicalCompanies")
+     */
+    private $jurisdiction;
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
@@ -127,6 +132,18 @@ class HistoricalCompany
     public function setCompany(?Company $company): self
     {
         $this->company = $company;
+
+        return $this;
+    }
+
+    public function getJurisdiction(): ?Jurisdiction
+    {
+        return $this->jurisdiction;
+    }
+
+    public function setJurisdiction(?Jurisdiction $jurisdiction): self
+    {
+        $this->jurisdiction = $jurisdiction;
 
         return $this;
     }

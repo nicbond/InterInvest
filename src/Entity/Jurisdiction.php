@@ -29,9 +29,15 @@ class Jurisdiction
      */
     private $companies;
 
+    /**
+     * @ORM\OneToMany(targetEntity=HistoricalCompany::class, mappedBy="jurisdiction")
+     */
+    private $historicalCompanies;
+
     public function __construct()
     {
         $this->companies = new ArrayCollection();
+        $this->historicalCompanies = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -75,6 +81,36 @@ class Jurisdiction
             // set the owning side to null (unless already changed)
             if ($company->getJurisdiction() === $this) {
                 $company->setJurisdiction(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|HistoricalCompany[]
+     */
+    public function getHistoricalCompanies(): Collection
+    {
+        return $this->historicalCompanies;
+    }
+
+    public function addHistoricalCompany(HistoricalCompany $historicalCompany): self
+    {
+        if (!$this->historicalCompanies->contains($historicalCompany)) {
+            $this->historicalCompanies[] = $historicalCompany;
+            $historicalCompany->setJurisdiction($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistoricalCompany(HistoricalCompany $historicalCompany): self
+    {
+        if ($this->historicalCompanies->removeElement($historicalCompany)) {
+            // set the owning side to null (unless already changed)
+            if ($historicalCompany->getJurisdiction() === $this) {
+                $historicalCompany->setJurisdiction(null);
             }
         }
 
