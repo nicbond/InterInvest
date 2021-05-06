@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Company'|trans}}{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+    <div class="text-primary" style="font-weight: bold;font-size: 4rem;"><h1>{{ 'Company'|trans}}</h1></div>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <th>{{ 'Name'|trans}}</th>
+                    <th>{{ 'Siren number'|trans}}</th>
+                    <th>{{ 'City registration'|trans}}</th>
+                    <th>{{ 'Share social'|trans}}</th>
+                    <th>{{ 'Date registration'|trans}}</th>
+                </tr>
+                <tr>
+                    <td>{{ company.id }}</td>
+                    <td>{{ company.name }}</td>
+                    <td>{{ company.sirenNumber }}</td>
+                    <td>{{ company.cityRegistration }}</td>
+                    <td>{{ company.shareSocial }}</td>
+                    <td>{{ company.dateRegistration|date('d-m-Y H:i:s') }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container mt-4">
+        <div class="text-primary" style="font-weight: bold;font-size: 4rem;"><h1>{{ 'Show all addresses'|trans}}</h1></div>
+        </br>
+            <div class="row">
+                {% if company.addresses is empty %}
+                    <tr>
+                        <td colspan="3">{{ 'no records found'|trans}}</td>
+                    </tr>
+                {% else %}
+                {% for address in company.addresses %}
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                 <th>Id</th>
+                                 <th>{{ 'Number'|trans}}</th>
+                                 <th>{{ 'Way'|trans}}</th>
+                                 <th>{{ 'Street_name'|trans}}</th>
+                                 <th>{{ 'Postal_code'|trans}}</th>
+                                 <th>{{ 'City'|trans}}</th>
+                            </tr>
+                            <tr>
+                                 <td>{{ address.id }}</td>
+                                 <td>{{ address.number }}</td>
+                                 <td>{{ address.way }}</td>
+                                 <td>{{ address.streetName }}</td>
+                                 <td>{{ address.postalCode }}</td>
+                                 <td>{{ address.city }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                {% endfor %}
+                {% endif %}
+            </div>
+
+        <div class="text-right">
+            <a href="{{ path('company_index') }}" class="btn btn-primary">{{ 'Back to list'|trans}}</a>
+        </div>
+    </div>
+{% endblock %}

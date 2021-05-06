@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous nos biens{% endblock %}
+
+{% block body %}
+    <div class="jumbotron">
+        <div class="container">
+            {{ form_start(form) }}
+                <div class="form-row align-items-end">
+                    <div class="col">
+                        {{ form_row(form.created_at) }}
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <button class="btn btn-primary">Rechercher</button>
+                        </div>
+                    </div>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="text-primary" style="font-weight: bold;font-size: 4rem;"><h1>{{ 'Company historical'|trans}}</h1></div>
+        </br>
+            <div class="container mt-4">
+                <div class="text-primary" style="font-weight: bold;font-size: 4rem;"><h1>{{ 'Info'|trans}}</h1></div>
+                </br>
+                     <div class="row">
+                         <table class="table">
+                             <thead>
+                                 <tr>
+                                     <th>{{ 'Name'|trans}}</th>
+                                     <th>{{ 'Siren number'|trans}}</th>
+                                     <th>{{ 'City registration'|trans}}</th>
+                                     <th>{{ 'Share social'|trans}}</th>
+                                     <th>{{ 'Legal form'|trans}}</th>
+                                     <th>{{ 'Modification Date'|trans}}</th>
+                                 </tr>
+                             </thead>
+                            <tbody>
+                                {% for companyInfo in companyInfos %}
+                                    {% include 'historical/_company.html.twig' %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="3">{{ 'no records found'|trans}}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                         </table>
+            </div>
+    </div>
+    </br>
+
+    <div class="container mt-4">
+    <div class="text-primary" style="font-weight: bold;font-size: 4rem;"><h1>{{ 'Company address history'|trans}}</h1></div>
+        </br>
+            <div class="container mt-4">
+                <div class="text-primary" style="font-weight: bold;font-size: 4rem;"><h1>{{ 'Info'|trans}}</h1></div>
+                </br>
+                    <div class="row">
+                         <table class="table">
+                             <thead>
+                                 <tr>
+                                     <th>{{ 'Number'|trans}}</th>
+                                     <th>{{ 'Way'|trans}}</th>
+                                     <th>{{ 'Street_name'|trans}}</th>
+                                     <th>{{ 'City'|trans}}</th>
+                                     <th>{{ 'Postal_code'|trans}}</th>
+                                     <th>{{ 'Modification Date'|trans}}</th>
+                                 </tr>
+                             </thead>
+                            <tbody>
+                                {% for addressInfo in addressInfos %}
+                                    {% include 'historical/_address.html.twig' %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="3">{{ 'no records found'|trans}}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                         </table>
+                    </div>
+            </div>
+{% endblock %}

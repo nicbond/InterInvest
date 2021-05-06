@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Address index'|trans}}{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <div class="text-primary" style="font-weight: bold;font-size: 4rem;"><h1>{{ 'Address index'|trans}}</h1></div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>{{ 'Company'|trans}}</th>
+                    <th>{{ 'Number'|trans}}</th>
+                    <th>{{ 'Way'|trans}}</th>
+                    <th>{{ 'Street_name'|trans}}</th>
+                    <th>{{ 'City'|trans}}</th>
+                    <th>{{ 'Postal_code'|trans}}</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+        <tbody>
+        {% for address in addresses %}
+            <tr>
+                <td>{{ address.id }}</td>
+                <td>{{ address.company.name }}</td>
+                <td>{{ address.number }}</td>
+                <td>{{ address.way }}</td>
+                <td>{{ address.streetName }}</td>
+                <td>{{ address.city }}</td>
+                <td>{{ address.postalCode }}</td>
+                <td>
+                    <a href="{{ path('address_show', {'id': address.id}) }}" class="btn btn-primary">{{ 'Show'|trans}}</a>
+                    <a href="{{ path('address_edit', {'id': address.id}) }}" class="btn btn-primary">{{ 'Edit'|trans}}</a>
+                    <form method="post" action="{{ path('address_delete', {'id': address.id}) }}" style="display: inline-block" 
+                    onsubmit="return confirm('Etes vous vraiment sûr?')">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ address.id) }}">
+                    <button class="btn btn-danger">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">{{ 'no records found'|trans}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="text-right">
+        <a href="{{ path('address_new') }}" class="btn btn-primary">{{ 'Create new address'|trans}}</a>
+    </div>
+
+    </div>
+{% endblock %}
