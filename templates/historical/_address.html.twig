@@ -1,0 +1,20 @@
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>{{ 'Number'|trans}}</th>
+                    <th>{{ 'Way'|trans}}</th>
+                    <th>{{ 'Street_name'|trans}}</th>
+                    <th>{{ 'City'|trans}}</th>
+                    <th>{{ 'Postal_code'|trans}}</th>
+                    <th>{{ 'Modification Date'|trans}}</th>
+                </tr>
+                <tr>
+                    <td>{{ addressInfo.number }}</td>
+                    <td>{{ addressInfo.way }}</td>
+                    <td>{{ addressInfo.streetName }}</td>
+                    <td>{{ addressInfo.city }}</td>
+                    <td>{{ addressInfo.postalCode }}</td>
+                    <td>{{ addressInfo.createdAt|date('d-m-Y H:i:s') }}</td>
+                </tr>
+            </tbody>
+        </table>

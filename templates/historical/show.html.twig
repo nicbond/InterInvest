@@ -34,12 +34,36 @@
                                      <th>{{ 'Siren number'|trans}}</th>
                                      <th>{{ 'City registration'|trans}}</th>
                                      <th>{{ 'Share social'|trans}}</th>
+                                     <th>{{ 'Legal form'|trans}}</th>
                                      <th>{{ 'Modification Date'|trans}}</th>
                                  </tr>
                              </tbody>
                          </table>
                 {% for companyInfo in companyInfos %}
-                        {% include 'historical/_company.html.twig' %}
+                    {% include 'historical/_company.html.twig' %}
+                {% else %}
+                <tr>
+                    <td colspan="3">{{ 'no records found'|trans}}</td>
+                </tr>
+                {% endfor %}
+            </div>
+    </div>
+
+    </br>
+
+    <div class="container mt-4">
+    <div class="text-primary" style="font-weight: bold;font-size: 4rem;"><h1>{{ 'Company address history'|trans}}</h1></div>
+        </br>
+            <div class="container mt-4">
+                <div class="text-primary" style="font-weight: bold;font-size: 4rem;"><h1>{{ 'Info'|trans}}</h1></div>
+                </br>
+                     <div class="row">
+                {% for addressInfo in addressInfos %}
+                        {% include 'historical/_address.html.twig' %}
+                {% else %}
+                <tr>
+                    <td colspan="3">{{ 'no records found'|trans}}</td>
+                </tr>
                 {% endfor %}
             </div>
     </div>

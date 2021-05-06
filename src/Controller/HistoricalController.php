@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\HistoricalSearch;
 use App\Form\HistoricalSearchType;
 use App\Repository\HistoricalCompanyRepository;
+use App\Repository\HistoricalAddressRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,9 +21,15 @@ class HistoricalController extends AbstractController
     */
     private $historicalCompanyRepository;
 
-    public function __construct(HistoricalCompanyRepository $historicalCompanyRepository)
+    /**
+     * @var HistoricalAddressRepository
+    */
+    private $historicalAddressRepository;
+
+    public function __construct(HistoricalCompanyRepository $historicalCompanyRepository, HistoricalAddressRepository $historicalAddressRepository)
     {
         $this->historicalCompanyRepository = $historicalCompanyRepository;
+        $this->historicalAddressRepository = $historicalAddressRepository;
     }
 
     /**
@@ -36,9 +43,11 @@ class HistoricalController extends AbstractController
         $form->handleRequest($request);
 
         $companyInfos = $this->historicalCompanyRepository->findByCompanyAndDate($id, $search);
+        $addressInfos = $this->historicalAddressRepository->findByCompanyAndDate($id, $search);
 
         return $this->render('historical/show.html.twig', [
             'companyInfos'   => $companyInfos,
+            'addressInfos'   => $addressInfos,
             'form' => $form->createView()
         ]);
     }
