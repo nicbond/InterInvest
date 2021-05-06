@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\HistoricalCompany;
+use App\Entity\HistoricalSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,32 +20,21 @@ class HistoricalCompanyRepository extends ServiceEntityRepository
         parent::__construct($registry, HistoricalCompany::class);
     }
 
-    // /**
-    //  * @return HistoricalCompany[] Returns an array of HistoricalCompany objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('h')
-            ->andWhere('h.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('h.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
+    /**
+    * @return HistoricalCompany[] Returns an array of HistoricalCompany objects
     */
+    public function findByCompanyAndDate($id, HistoricalSearch $search)
+    {
+        $query = $this->createQueryBuilder('h')
+            ->Where('h.company = :id')
+            ->setParameter('id', $id);
 
-    /*
-    public function findOneBySomeField($value): ?HistoricalCompany
-    {
-        return $this->createQueryBuilder('h')
-            ->andWhere('h.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        if ($search->getCreatedAt()) {
+            $query = $query
+                ->andWhere('h.created_at <= :searchDate')
+                ->setParameter('searchDate', $search->getCreatedAt()->format('Y-m-d H:i:s'));
+        }
+
+        return $query->getQuery()->getResult();
     }
-    */
 }

@@ -21,6 +21,7 @@
                 <td>{{ company.jurisdiction.name }}</td>
                 <td>
                     <a href="{{ path('company_show', {'id': company.id}) }}" class="btn btn-primary">{{ 'Show'|trans}}</a>
+                    <a href="{{ path('historical_show', {'id': company.id}) }}" class="btn btn-primary">{{ 'Historical'|trans}}</a>
                     <a href="{{ path('company_edit', {'id': company.id}) }}" class="btn btn-primary">{{ 'Edit'|trans}}</a>
                     <form method="post" action="{{ path('company_delete', {'id': company.id}) }}" style="display: inline-block" 
                     onsubmit="return confirm('Etes vous vraiment sûr?')">
