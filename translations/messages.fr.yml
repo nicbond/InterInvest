@@ -5,7 +5,7 @@ Jurisdiction: Forme légale
 no records found: pas de résultats trouvés
 Name: Nom
 Edit: Editer
-Show: Voir
+Show: Infos
 Back to list: Revenir à la liste
 Delete: Supprimer
 Are you sure you want to delete this item?: Etes vous sur de vouloir supprimer l'élément?
@@ -30,3 +30,7 @@ Edit the address: Editer l'adresse
 Address: Adresse
 Show all addresses: Voir toutes les adresses liées
 Legal form: Forme juridique
+Historical: Historique
+Modification Date: Date de modification
+Company historical: Historique de la société
+Info: Informations
