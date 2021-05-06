@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Company;
 use App\Entity\Jurisdiction;
+use App\Repository\JurisdictionRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,7 +21,11 @@ class CompanyType extends AbstractType
             ->add('share_social')
             ->add('jurisdiction', EntityType::class, [
                 'class'    => Jurisdiction::class,
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'query_builder' => function(JurisdictionRepository $repo) {
+                 return $repo->createQueryBuilder('j')
+                ->orderBy('j.name', 'ASC');
+                }
             ])
         ;
     }
