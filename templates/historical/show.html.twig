@@ -28,7 +28,7 @@
                 </br>
                      <div class="row">
                          <table class="table">
-                             <tbody>
+                             <thead>
                                  <tr>
                                      <th>{{ 'Name'|trans}}</th>
                                      <th>{{ 'Siren number'|trans}}</th>
@@ -37,18 +37,19 @@
                                      <th>{{ 'Legal form'|trans}}</th>
                                      <th>{{ 'Modification Date'|trans}}</th>
                                  </tr>
-                             </tbody>
+                             </thead>
+                            <tbody>
+                                {% for companyInfo in companyInfos %}
+                                    {% include 'historical/_company.html.twig' %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="3">{{ 'no records found'|trans}}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
                          </table>
-                {% for companyInfo in companyInfos %}
-                    {% include 'historical/_company.html.twig' %}
-                {% else %}
-                <tr>
-                    <td colspan="3">{{ 'no records found'|trans}}</td>
-                </tr>
-                {% endfor %}
             </div>
     </div>
-
     </br>
 
     <div class="container mt-4">
@@ -57,14 +58,28 @@
             <div class="container mt-4">
                 <div class="text-primary" style="font-weight: bold;font-size: 4rem;"><h1>{{ 'Info'|trans}}</h1></div>
                 </br>
-                     <div class="row">
-                {% for addressInfo in addressInfos %}
-                        {% include 'historical/_address.html.twig' %}
-                {% else %}
-                <tr>
-                    <td colspan="3">{{ 'no records found'|trans}}</td>
-                </tr>
-                {% endfor %}
+                    <div class="row">
+                         <table class="table">
+                             <thead>
+                                 <tr>
+                                     <th>{{ 'Number'|trans}}</th>
+                                     <th>{{ 'Way'|trans}}</th>
+                                     <th>{{ 'Street_name'|trans}}</th>
+                                     <th>{{ 'City'|trans}}</th>
+                                     <th>{{ 'Postal_code'|trans}}</th>
+                                     <th>{{ 'Modification Date'|trans}}</th>
+                                 </tr>
+                             </thead>
+                            <tbody>
+                                {% for addressInfo in addressInfos %}
+                                    {% include 'historical/_address.html.twig' %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="3">{{ 'no records found'|trans}}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                         </table>
+                    </div>
             </div>
-    </div>
 {% endblock %}

@@ -1,12 +1,8 @@
-        <table class="table">
-            <tbody>
-                <tr>
-                    <td>{{ companyInfo.name }}</td>
-                    <td>{{ companyInfo.sirenNumber }}</td>
-                    <td>{{ companyInfo.cityRegistration }}</td>
-                    <td>{{ companyInfo.shareSocial }}</td>
-                    <td>{{ companyInfo.jurisdiction.name }}</td>
-                    <td>{{ companyInfo.createdAt|date('d-m-Y H:i:s') }}</td>
-                </tr>
-            </tbody>
-        </table>
+    <tr>
+        <td>{{ companyInfo.name }}</td>
+        <td>{{ companyInfo.sirenNumber }}</td>
+        <td>{{ companyInfo.cityRegistration }}</td>
+        <td>{{ companyInfo.shareSocial }}</td>
+        <td>{{ companyInfo.jurisdiction.name }}</td>
+        <td>{{ companyInfo.createdAt|date('d-m-Y H:i:s') }}</td>
+    </tr>
