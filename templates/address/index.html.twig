@@ -10,6 +10,7 @@
             <thead>
                 <tr>
                     <th>Id</th>
+                    <th>{{ 'Company'|trans}}</th>
                     <th>{{ 'Number'|trans}}</th>
                     <th>{{ 'Way'|trans}}</th>
                     <th>{{ 'Street_name'|trans}}</th>
@@ -22,6 +23,7 @@
         {% for address in addresses %}
             <tr>
                 <td>{{ address.id }}</td>
+                <td>{{ address.company.name }}</td>
                 <td>{{ address.number }}</td>
                 <td>{{ address.way }}</td>
                 <td>{{ address.streetName }}</td>
