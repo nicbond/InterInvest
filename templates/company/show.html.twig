@@ -37,28 +37,30 @@
                         <td colspan="3">{{ 'no records found'|trans}}</td>
                     </tr>
                 {% else %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>{{ 'Number'|trans}}</th>
+                            <th>{{ 'Way'|trans}}</th>
+                            <th>{{ 'Street_name'|trans}}</th>
+                            <th>{{ 'Postal_code'|trans}}</th>
+                            <th>{{ 'City'|trans}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                 {% for address in company.addresses %}
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                 <th>Id</th>
-                                 <th>{{ 'Number'|trans}}</th>
-                                 <th>{{ 'Way'|trans}}</th>
-                                 <th>{{ 'Street_name'|trans}}</th>
-                                 <th>{{ 'Postal_code'|trans}}</th>
-                                 <th>{{ 'City'|trans}}</th>
-                            </tr>
-                            <tr>
-                                 <td>{{ address.id }}</td>
-                                 <td>{{ address.number }}</td>
-                                 <td>{{ address.way }}</td>
-                                 <td>{{ address.streetName }}</td>
-                                 <td>{{ address.postalCode }}</td>
-                                 <td>{{ address.city }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        <tr>
+                            <td>{{ address.id }}</td>
+                            <td>{{ address.number }}</td>
+                            <td>{{ address.way }}</td>
+                            <td>{{ address.streetName }}</td>
+                            <td>{{ address.postalCode }}</td>
+                            <td>{{ address.city }}</td>
+                        </tr>
                 {% endfor %}
+                    </tbody>
+                </table>
                 {% endif %}
             </div>
 
