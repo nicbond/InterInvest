@@ -66,19 +66,18 @@ class CompanyController extends AbstractController
     public function edit(Request $request, Company $company): Response
     {
         $historical = new HistoricalCompany();
+        $historical->setName($company->getName());
+        $historical->setSirenNumber($company->getSirenNumber());
+        $historical->setCityRegistration($company->getCityRegistration());
+        $historical->setShareSocial($company->getShareSocial());
+        $historical->setCompany($company);
+        $historical->setJurisdiction($company->getJurisdiction());
+        $this->getDoctrine()->getManager()->persist($historical);
 
         $form = $this->createForm(CompanyType::class, $company);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $historical->setName($company->getName());
-            $historical->setSirenNumber($company->getSirenNumber());
-            $historical->setCityRegistration($company->getCityRegistration());
-            $historical->setShareSocial($company->getShareSocial());
-            $historical->setCompany($company);
-            $historical->setJurisdiction($company->getJurisdiction());
-
-            $this->getDoctrine()->getManager()->persist($historical);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('company_index');

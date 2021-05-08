@@ -66,20 +66,19 @@ class AddressController extends AbstractController
     public function edit(Request $request, Address $address): Response
     {
         $historical = new HistoricalAddress();
+        $historical->setNumber($address->getNumber());
+        $historical->setWay($address->getWay());
+        $historical->setStreetName($address->getStreetName());
+        $historical->setCity($address->getCity());
+        $historical->setPostalCode($address->getPostalCode());
+        $historical->setAddress($address);
+        $historical->setCompany($address->getCompany());
+        $this->getDoctrine()->getManager()->persist($historical);
 
         $form = $this->createForm(AddressType::class, $address);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $historical->setNumber($address->getNumber());
-            $historical->setWay($address->getWay());
-            $historical->setStreetName($address->getStreetName());
-            $historical->setCity($address->getCity());
-            $historical->setPostalCode($address->getPostalCode());
-            $historical->setAddress($address);
-            $historical->setCompany($address->getCompany());
-
-            $this->getDoctrine()->getManager()->persist($historical);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('address_index');
